@@ -1,34 +1,37 @@
-import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
 import org.junit.Test;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.anyOf;
+import static io.restassured.RestAssured.given;
 
 
 public class PetTests {
 
-
-
-    private RequestSpecification given(){
-        return RestAssured
-                .given()
-                .log().all()
-                .baseUri("https://petstore.swagger.io/v2")
-                .contentType("application/json");
-    }
+PetEndpoint petEndpoint = new PetEndpoint();
 
 
     @Test
     public void getPetById(){
-        int petId = 666;
-        given()
-                .get(PetEndpoint.GET_PET, petId)
-                .then()
-                .log().all()
-                .body("id", anyOf(is(665), is(petId)))
-                .statusCode(200);
-    }
+        String body = "{\n" +
+                "  \"id\": 0,\n" +
+                "  \"category\": {\n" +
+                "    \"id\": 0,\n" +
+                "    \"name\": \"string\"\n" +
+                "  },\n" +
+                "  \"name\": \"kitty\",\n" +
+                "  \"photoUrls\": [\n" +
+                "    \"string\"\n" +
+                "  ],\n" +
+                "  \"tags\": [\n" +
+                "    {\n" +
+                "      \"id\": 0,\n" +
+                "      \"name\": \"string\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"status\": \"available\"\n" +
+                "}";
+        Long petId = petEndpoint.createPet(body);
+        petEndpoint.getPet(petId);
+        petEndpoint.deletePet(petId);
+
+    } //ВЫНЕСЛИ ВДРУГОЙ КЛАСС
 
 
 
