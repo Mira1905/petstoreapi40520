@@ -30,18 +30,26 @@ public class PetEndpoint {
                 .statusCode(200);
     }
 
-
+    public String getPetName(Long petId){
+        ValidatableResponse response =  given()
+                .get(GET_PET, petId)
+                .then()
+                .log().all()
+                .body("id", anyOf(is(petId)))
+                .statusCode(200);
+        return response.extract().path("name");
+    }
 
 
     public Long createPet(String body) {
-     ValidatableResponse response =  given()
+        ValidatableResponse response =  given()
                 .body(body)
                 .post(CREATE_PET)
                 .then()
                 .log().all()
-              //  .body("name",is("cat"))//todo:unharcode penName
+                //.body("name",is("Cat"))//todo:unharcode petName
                 .statusCode(200);
-                return response.extract().path("id");
+        return response.extract().path("id");
 
     }
 
@@ -51,8 +59,8 @@ public class PetEndpoint {
                 .put(UPDATE_PET)
                 .then()
                 .log().all()
-                //  .body("name",is("cat"))//todo:unharcode penName
-                .statusCode(200);;
+                //.body("name",is("kitty"))//todo:unharcode petName
+                .statusCode(200);
     }
 
 

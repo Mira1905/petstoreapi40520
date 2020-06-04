@@ -1,9 +1,10 @@
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GetPetTests {
-//получение ресурса GET — получение ресурса
+public class CreatePetTests {
+//создать питомца POST — создание ресурса
 
     private PetEndpoint petEndpoint = new PetEndpoint();
     private Long petId;
@@ -16,7 +17,7 @@ public class GetPetTests {
                 "    \"id\": 0,\n" +
                 "    \"name\": \"string\"\n" +
                 "  },\n" +
-                "  \"name\": \"kitty\",\n" +
+                "  \"name\": \"Cat\",\n" +
                 "  \"photoUrls\": [\n" +
                 "    \"string\"\n" +
                 "  ],\n" +
@@ -29,7 +30,7 @@ public class GetPetTests {
                 "  \"status\": \"available\"\n" +
                 "}";
         petId = petEndpoint.createPet(body);
-
+        System.out.println(petEndpoint.createPet(body));
     }
 
     @After
@@ -38,10 +39,23 @@ public class GetPetTests {
 
     }
 
+
     @Test
-    public void getPetById(){
-        petEndpoint.getPet(petId);
+    public void  createPet(){
+
 
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

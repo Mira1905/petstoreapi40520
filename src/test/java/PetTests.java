@@ -2,6 +2,7 @@ import org.junit.Test;
 import static io.restassured.RestAssured.given;
 
 
+
 public class PetTests {
 
 PetEndpoint petEndpoint = new PetEndpoint();
