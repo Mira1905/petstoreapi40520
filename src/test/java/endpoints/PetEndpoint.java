@@ -1,6 +1,10 @@
+package endpoints;
+
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+import models.Pet;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.anyOf;
 
@@ -41,13 +45,13 @@ public class PetEndpoint {
     }
 
 
-    public Long createPet(String body) {
+    public Long createPet(Pet pet) {
         ValidatableResponse response =  given()
-                .body(body)
+                .body(pet)
                 .post(CREATE_PET)
                 .then()
                 .log().all()
-                //.body("name",is("Cat"))//todo:unharcode petName
+                .body("name",is(pet.getName()))//todo:unharcode petName
                 .statusCode(200);
         return response.extract().path("id");
 
