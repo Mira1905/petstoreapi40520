@@ -2,24 +2,6 @@ package models;
 
 public class Pet {
 
-//    "{\n" +
-//            "  \"id\": 0,\n" +
-//            "  \"category\": {\n" +
-//            "    \"id\": 0,\n" +
-//            "    \"name\": \"string\"\n" +
-//            "  },\n" +
-//            "  \"name\": \"kitty\",\n" +
-//            "  \"photoUrls\": [\n" +
-//            "    \"string\"\n" +
-//            "  ],\n" +
-//            "  \"tags\": [\n" +
-//            "    {\n" +
-//            "      \"id\": 0,\n" +
-//            "      \"name\": \"string\"\n" +
-//            "    }\n" +
-//            "  ],\n" +
-//            "  \"status\": \"available\"\n" +
-//            "}"
 
     //Структура данных
     private long id;
@@ -30,11 +12,24 @@ public class Pet {
     private String status;
 
 
+
     //конструктор
     public Pet(long id, String name) {
         this.category = new Category(3,"tests");
         this.id = id;
         this.name = name;
+    }
+
+    public Pet(String status) {
+        this.status = status;
+    }
+
+    public Pet(String[] photoUrls) {
+        this.photoUrls = photoUrls;
+    }
+
+    public Pet(Object[] tags) {
+        this.tags = tags;
     }
 
 

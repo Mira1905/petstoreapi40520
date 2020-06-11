@@ -1,40 +1,25 @@
-//import org.junit.Before;
-//import org.junit.Test;
-//
-//public class DeletePetTests {
-//// DELETE — удаление ресурса
-//
-//    private endpoints.PetEndpoint petEndpoint = new endpoints.PetEndpoint();
-//    private Long petId;
-//
-//    @Before
-//    public void before(){
-//        String body = "{\n" +
-//                "  \"id\": 0,\n" +
-//                "  \"category\": {\n" +
-//                "    \"id\": 0,\n" +
-//                "    \"name\": \"string\"\n" +
-//                "  },\n" +
-//                "  \"name\": \"kitty\",\n" +
-//                "  \"photoUrls\": [\n" +
-//                "    \"string\"\n" +
-//                "  ],\n" +
-//                "  \"tags\": [\n" +
-//                "    {\n" +
-//                "      \"id\": 0,\n" +
-//                "      \"name\": \"string\"\n" +
-//                "    }\n" +
-//                "  ],\n" +
-//                "  \"status\": \"available\"\n" +
-//                "}";
-//        petId = petEndpoint.createPet(body);
-//
-//    }
-//
-//
-//    @Test
-//    public void updatePet(){
-//        petEndpoint.deletePet(petId);
-//
-//    }
-//}
+package tests;
+import models.Pet;
+import org.junit.Before;
+import org.junit.Test;
+
+public class DeletePetTests {
+// DELETE — удаление ресурса
+
+    private endpoints.PetEndpoint petEndpoint = new endpoints.PetEndpoint();
+    private Long petId;
+
+    @Before
+    public void before(){
+        Pet pet= new Pet(0,"kitty");
+        petId = petEndpoint.createPet(pet);
+
+    }
+
+
+    @Test
+    public void updatePet(){
+        petEndpoint.deletePet(petId);
+
+    }
+}

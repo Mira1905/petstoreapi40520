@@ -1,5 +1,4 @@
 package tests;
-
 import endpoints.PetEndpoint;
 import models.Pet;
 import org.junit.After;
