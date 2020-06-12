@@ -12,9 +12,4 @@ public class Tags {
 
 
 
-
-//    public Tags(String name) {
-//        this.id = 0;
-//        this.name = name;
-//    }
 }

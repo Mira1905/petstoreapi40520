@@ -19,7 +19,6 @@ public class UpdatetPetTests {
                 .status("available")
                 .name("kitty")
                 .build();
-
         petId = petEndpoint.createPet(pet);
 
     }
