@@ -27,7 +27,7 @@ public class UpdatetPetTests {
 
     @Test
     public void updatePet(){
-       //  petEndpoint.updatePet(petId);
+         petEndpoint.updatePet(petId);
          petEndpoint.getPetName(petId);
         System.out.println( petEndpoint.getPetName(petId));
     }

@@ -57,13 +57,13 @@ public class PetEndpoint {
 
     }
 
-    public void updatePet(Pet pet) {
+    public void updatePet(Long pet) {
         ValidatableResponse response =  given()
                 .body(pet)
                 .put(UPDATE_PET)
                 .then()
                 .log().all()
-                .body("name",is(pet.getName()))//todo:unharcode petName
+                .body("name",is("kitty"))//todo:unharcode petName
                 .statusCode(200);
     }
 
