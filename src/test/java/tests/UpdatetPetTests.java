@@ -14,11 +14,16 @@ public class UpdatetPetTests {
 
     @Before
     public void before(){
-        Pet pet= new Pet(0,"kitty");
+        //Pet pet= new Pet(0,"kitty");
+        Pet pet = Pet.builder()
+                .id(0)
+                .name("kitty")
+                .status("available")
+                .build();
+
         petId = petEndpoint.createPet(pet);
 
     }
-
 
     @After
     public void after (){
@@ -27,9 +32,10 @@ public class UpdatetPetTests {
 
     @Test
     public void updatePet(){
-         petEndpoint.updatePet(petId);
-         petEndpoint.getPetName(petId);
-        System.out.println( petEndpoint.getPetName(petId));
+
+       // Pet pet = new Pet(petId,"kitty","sold");
+      //  petEndpoint.updatePet(petId);
+
     }
 
 

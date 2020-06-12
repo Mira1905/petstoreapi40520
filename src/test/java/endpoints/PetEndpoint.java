@@ -63,7 +63,7 @@ public class PetEndpoint {
                 .put(UPDATE_PET)
                 .then()
                 .log().all()
-                .body("name",is("kitty"))//todo:unharcode petName
+               // .body("name",is(pet.getName()))//todo:unharcode petName
                 .statusCode(200);
     }
 
