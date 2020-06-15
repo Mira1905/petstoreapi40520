@@ -7,8 +7,10 @@ import lombok.Getter;
 public class Category {
 
     //Структура данных
-    private long id;
-    private String name;
+    @Builder.Default
+    private long id = 0;
+    @Builder.Default
+    private String name = "zoo";
 
 
 

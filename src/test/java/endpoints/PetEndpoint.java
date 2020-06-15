@@ -1,9 +1,9 @@
 package endpoints;
-
-import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import models.Pet;
+import net.serenitybdd.rest.SerenityRest;
+import net.thucydides.core.annotations.Step;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.anyOf;
@@ -17,7 +17,7 @@ public class PetEndpoint {
 
 
     public RequestSpecification given(){
-        return RestAssured
+        return SerenityRest
                 .given()
                 .log().all()
                 .baseUri("https://petstore.swagger.io/v2")
@@ -25,14 +25,6 @@ public class PetEndpoint {
     }
 
 
-    public void getPet(Long petId){
-        given()
-                .get(GET_PET, petId)
-                .then()
-                .log().all()
-                .body("id", anyOf(is(petId)))
-                .statusCode(200);
-    }
 
     public String getPetName(Long petId){
         ValidatableResponse response =  given()
@@ -45,6 +37,19 @@ public class PetEndpoint {
     }
 
 
+
+    @Step
+    public void getPet(Long petId){
+        given()
+                .get(GET_PET, petId)
+                .then()
+                .log().all()
+                .body("id", anyOf(is(petId)))
+                .statusCode(200);
+    }
+
+
+    @Step
     public Long createPet(Pet pet) {
         ValidatableResponse response =  given()
                 .body(pet)
@@ -56,8 +61,8 @@ public class PetEndpoint {
         return response.extract().path("id");
 
     }
-
-    public void updatePet(Long pet) {
+    @Step
+    public void updatePet(Pet pet) {
         ValidatableResponse response =  given()
                 .body(pet)
                 .put(UPDATE_PET)
@@ -67,7 +72,7 @@ public class PetEndpoint {
                 .statusCode(200);
     }
 
-
+    @Step
     public void deletePet(Long petId) {
         given()
                 .delete(PetEndpoint.DELETE_PET, petId)

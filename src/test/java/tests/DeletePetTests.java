@@ -22,7 +22,7 @@ public class DeletePetTests {
 
 
     @Test
-    public void updatePet(){
+    public void deletePet(){
         petEndpoint.deletePet(petId);
 
     }
