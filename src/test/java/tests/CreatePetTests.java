@@ -1,9 +1,13 @@
 package tests;
 import endpoints.PetEndpoint;
 import models.Pet;
+import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.After;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+
+@RunWith(SerenityRunner.class)
 public class CreatePetTests {
 //создать питомца POST — создание ресурса
 

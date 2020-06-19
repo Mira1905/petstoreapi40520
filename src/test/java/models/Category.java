@@ -11,9 +11,4 @@ public class Category {
     private long id = 0;
     @Builder.Default
     private String name = "zoo";
-
-
-
-
-
 }
