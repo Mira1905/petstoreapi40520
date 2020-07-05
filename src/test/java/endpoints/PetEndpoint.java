@@ -7,7 +7,6 @@ import io.restassured.specification.RequestSpecification;
 import models.Pet;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.anyOf;
 
@@ -18,6 +17,7 @@ public class PetEndpoint {
     public final  static String DELETE_PET = "/pet/{petId}";
     public final  static String GET_PET = "/pet/{petId}";
     public final static String GET_PET_BY_STATUS = "/pet/findByStatus";
+    public final  static String CREATE_PET_IMAGE = "/pet/image";
 
 
     static {
@@ -79,6 +79,22 @@ public class PetEndpoint {
         return response.extract().path("id");
 
     }
+
+
+    @Step
+    public Long createPetImage(Pet pet) {
+        ValidatableResponse response =  given()
+                .body(pet)
+                .post(CREATE_PET_IMAGE)
+                .then()
+                .body("name",is(pet.getName()))//todo:unharcode petName
+                .statusCode(200);
+        return response.extract().path("id");
+
+    }
+
+
+
     @Step
     public void updatePet(Pet pet) {
         ValidatableResponse response =  given()
