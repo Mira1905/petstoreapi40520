@@ -1,4 +1,7 @@
 package endpoints;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import models.Pet;
@@ -14,23 +17,27 @@ public class PetEndpoint {
     public final  static String UPDATE_PET = "/pet";
     public final  static String DELETE_PET = "/pet/{petId}";
     public final  static String GET_PET = "/pet/{petId}";
+    public final static String GET_PET_BY_STATUS = "/pet/findByStatus";
 
 
-    public RequestSpecification given(){
+    static {
+        SerenityRest.filters(new RequestLoggingFilter(LogDetail.ALL));
+        SerenityRest.filters(new ResponseLoggingFilter(LogDetail.ALL));
+    }
+
+        private RequestSpecification given(){
         return SerenityRest
                 .given()
-                .log().all()
                 .baseUri("https://petstore.swagger.io/v2")
                 .contentType("application/json");
     }
-
+// ЗАМЕТКА ДЛЯ СЕБЯ!!!!
 
 
     public String getPetName(Long petId){
         ValidatableResponse response =  given()
                 .get(GET_PET, petId)
                 .then()
-                .log().all()
                 .body("id", anyOf(is(petId)))
                 .statusCode(200);
         return response.extract().path("name");
@@ -43,10 +50,22 @@ public class PetEndpoint {
         given()
                 .get(GET_PET, petId)
                 .then()
-                .log().all()
                 .body("id", anyOf(is(petId)))
                 .statusCode(200);
     }
+
+
+
+    @Step
+    public void getPetByStatus(String status){
+        given()
+                .param("status",status)
+                .get(GET_PET_BY_STATUS)
+                .then()
+                .body("[0].status", is(status))//ToDo: verify each elements
+                .statusCode(200);
+    }
+
 
 
     @Step
@@ -55,7 +74,6 @@ public class PetEndpoint {
                 .body(pet)
                 .post(CREATE_PET)
                 .then()
-                .log().all()
                 .body("name",is(pet.getName()))//todo:unharcode petName
                 .statusCode(200);
         return response.extract().path("id");
@@ -67,7 +85,6 @@ public class PetEndpoint {
                 .body(pet)
                 .put(UPDATE_PET)
                 .then()
-                .log().all()
                // .body("name",is(pet.getName()))//todo:unharcode petName
                 .statusCode(200);
     }
@@ -77,7 +94,6 @@ public class PetEndpoint {
         given()
                 .delete(PetEndpoint.DELETE_PET, petId)
                 .then()
-                .log().all()
                // .body()
                 .statusCode(200);
 
