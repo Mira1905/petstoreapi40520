@@ -7,6 +7,9 @@ import io.restassured.specification.RequestSpecification;
 import models.Pet;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
+
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.anyOf;
 
@@ -81,17 +84,18 @@ public class PetEndpoint {
     }
 
 
-    @Step
-    public Long createPetImage(Pet pet) {
-        ValidatableResponse response =  given()
-                .body(pet)
-                .post(CREATE_PET_IMAGE)
-                .then()
-                .body("name",is(pet.getName()))//todo:unharcode petName
-                .statusCode(200);
-        return response.extract().path("id");
-
-    }
+//    File testFile = new File("platya.png");
+//
+//    @Step
+//    public void createPetImage() {
+//        ValidatableResponse response = (ValidatableResponse) given()
+//                .contentType("image/png")
+//                .basePath("/devushki_v_korotkih_platyah_1_25185950.jpg")
+//                .multiPart("test",testFile,"application/octet-stream" )
+//                .post();
+//
+//
+//    }
 
 
 

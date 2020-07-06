@@ -13,7 +13,7 @@ import lombok.Getter;
         @Builder.Default
         private String name = "kitty";
         @Builder.Default
-        private String[] photoUrls = new String[] {"https://habrastorage.org/getpro/habr/post_images/a60/848/42d/a6084842dd1354a400e1719a817f9bba.jpg"};
+        private String[] photoUrls = new String[] {"image1", "image2"};
         @Builder.Default
         private Tags[] tags = new Tags[]{Tags.builder().build()};
         @Builder.Default
