@@ -1,5 +1,6 @@
 package tests;
 import models.Pet;
+import models.Status;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Before;
@@ -19,7 +20,7 @@ public class DeletePetTests {
     public void before(){
         Pet pet = Pet.builder()
                 .id(0)
-                .status("available")
+                .status(Status.AVAILABLE)
                 .name("kitty")
                 .build();
         petId = petEndpoint.createPet(pet);

@@ -1,6 +1,7 @@
 package tests;
 import endpoints.PetEndpoint;
 import models.Pet;
+import models.Status;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import org.junit.After;
@@ -22,7 +23,7 @@ public class CreatePetTests {
     public void  createPet(){
         Pet pet = Pet.builder()
                     .id(0)
-                    .status("available")
+                    .status(Status.AVAILABLE)
                     .name("kitty")
                     .build();
             petId = petEndpoint.createPet(pet);

@@ -5,6 +5,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import models.Pet;
+import models.Status;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 
@@ -60,12 +61,12 @@ public class PetEndpoint {
 
 
     @Step
-    public void getPetByStatus(String status){
+    public void getPetByStatus(Status status){
         given()
                 .param("status",status)
                 .get(GET_PET_BY_STATUS)
                 .then()
-                .body("[0].status", is(status))//ToDo: verify each elements
+                .body("[0].status", is(status.toString()))//ToDo: verify each elements
                 .statusCode(200);
     }
 
@@ -83,19 +84,16 @@ public class PetEndpoint {
 
     }
 
+    @Step
+    public void updatePetImage(Pet pet) {
+        ValidatableResponse response =  given()
+                .body(pet)
+                .put(UPDATE_PET)
+                .then()
+                // .body("name",is(pet.getName()))//todo:unharcode petName
+                .statusCode(200);
+    }
 
-//    File testFile = new File("platya.png");
-//
-//    @Step
-//    public void createPetImage() {
-//        ValidatableResponse response = (ValidatableResponse) given()
-//                .contentType("image/png")
-//                .basePath("/devushki_v_korotkih_platyah_1_25185950.jpg")
-//                .multiPart("test",testFile,"application/octet-stream" )
-//                .post();
-//
-//
-//    }
 
 
 
