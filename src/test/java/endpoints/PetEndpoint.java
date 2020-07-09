@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Step;
 
 import java.io.File;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.anyOf;
 
@@ -21,7 +22,7 @@ public class PetEndpoint {
     public final  static String DELETE_PET = "/pet/{petId}";
     public final  static String GET_PET = "/pet/{petId}";
     public final static String GET_PET_BY_STATUS = "/pet/findByStatus";
-    public final  static String CREATE_PET_IMAGE = "/pet/image";
+    public final static String UPLOAD_PET_IMAGE = "/pet/{petId}/uploadImage";
 
 
     static {
@@ -61,16 +62,27 @@ public class PetEndpoint {
 
 
     @Step
-    public void getPetByStatus(Status status){
+    public void getPetByStatus(Status status) {
         given()
                 .param("status",status)
                 .get(GET_PET_BY_STATUS)
                 .then()
-                .body("[0].status", is(status.toString()))//ToDo: verify each elements
+                .body("[0].status", is(status.toString())) //ToDo: verify each element in array
                 .statusCode(200);
     }
 
 
+    @Step
+    public void uploadPetImage(Long petId, String relativeFilePath) {
+        File imageFile = new File(getClass().getResource(relativeFilePath).getFile());
+        given()
+                .contentType("multipart/form-data")
+                .multiPart(imageFile)
+                .post(UPLOAD_PET_IMAGE, petId)
+                .then()
+                .body("message", containsString(imageFile.getName()))
+                .statusCode(200);
+    }
 
     @Step
     public Long createPet(Pet pet) {
@@ -83,18 +95,6 @@ public class PetEndpoint {
         return response.extract().path("id");
 
     }
-
-    @Step
-    public void updatePetImage(Pet pet) {
-        ValidatableResponse response =  given()
-                .body(pet)
-                .put(UPDATE_PET)
-                .then()
-                // .body("name",is(pet.getName()))//todo:unharcode petName
-                .statusCode(200);
-    }
-
-
 
 
     @Step

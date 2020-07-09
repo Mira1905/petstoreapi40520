@@ -9,20 +9,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import java.io.File;
-import static io.restassured.RestAssured.given;
 
 @RunWith(SerenityRunner.class)
 public class UploadPetImageTests {
 
 
-    @Steps
-    private PetEndpoint petEndpoint = new PetEndpoint();
     private Long petId;
 
+    @Steps
+    private PetEndpoint petEndPoints;
 
     @Before
-    public void before(){
+    public void before() {
         Pet pet = Pet.builder()
                 .name("pet1")
                 .category(Category.builder()
@@ -30,31 +28,19 @@ public class UploadPetImageTests {
                         .name("test")
                         .build())
                 .build();
-        petId = petEndpoint.createPet(pet);
-
+        petId = petEndPoints.createPet(pet);
     }
-
-
-    @Test
-    public void  uploadPetImage(){
-
-            File testFile = new File("C:\\Users\\qa.Mira\\Pictures\\3d.jpg");
-
-            Response response = given()
-                    .baseUri("https://petstore.swagger.io/v2")
-                    .basePath("/pet/1/uploadImage")
-                    .multiPart("test", testFile, "application/octet-stream")
-                    .post();
-        }
 
     @After
-    public void after (){
-        petEndpoint.deletePet(petId);
+    public void after() {
+        petEndPoints.deletePet(petId);
     }
 
-
+    @Test
+    public void uploadPetImage() {
+        petEndPoints.uploadPetImage(petId, "/test/a-cat.png");
     }
-
+}
 
 
 

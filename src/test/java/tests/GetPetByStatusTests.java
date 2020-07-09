@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 import java.util.Collection;
-
 import static models.Status.AVAILABLE;
 import static models.Status.SOLD;
 
