@@ -38,15 +38,15 @@ public class PetEndpoint {
     }
 // ЗАМЕТКА ДЛЯ СЕБЯ!!!!
 
-
-    public String getPetName(Long petId){
-        ValidatableResponse response =  given()
-                .get(GET_PET, petId)
-                .then()
-                .body("id", anyOf(is(petId)))
-                .statusCode(200);
-        return response.extract().path("name");
-    }
+//
+//    public String getPetName(Long petId){
+//        ValidatableResponse response =  given()
+//                .get(GET_PET, petId)
+//                .then()
+//                .body("id", anyOf(is(petId)))
+//                .statusCode(200);
+//        return response.extract().path("name");
+//    }
 
 
 
