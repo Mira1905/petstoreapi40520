@@ -1,6 +1,6 @@
 package tests;
 import endpoints.StoreEndpoint;
-import models.Pet;
+import models.Order;
 import models.Status;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -9,37 +9,36 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
 @RunWith(SerenityRunner.class)
-public class GetStoreTests {
-
+public class GetOrderByStatus {
 
     @Steps
     private StoreEndpoint storeEndpoint = new StoreEndpoint();
-    private Long petId;
+    private Integer orderId;
+    private Status status;
+
 
 
     @Before
-    public void before(){
-        Pet pet = Pet.builder()
+    public void  createOrder(){
+        Order order = Order.builder()
                 .id(0)
-                .status(Status.AVAILABLE)
-                .name("kitty")
+                .status(status)
                 .build();
-       petId = storeEndpoint.createStore(pet);
+        orderId = storeEndpoint.createStore(order);
 
     }
 
 
     @Test
-    public void getStoryById(){
-        storeEndpoint.getStore(petId);
+    public void getStoreByStatusTests() {
+        storeEndpoint.getStoryByStatus();
 
     }
 
     @After
-    public void after (){
-        storeEndpoint.deleteStore(petId);
+    public void after() {
+        storeEndpoint.deleteStore(orderId);
 
     }
 }

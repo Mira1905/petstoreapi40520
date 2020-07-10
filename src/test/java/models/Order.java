@@ -1,14 +1,13 @@
 package models;
 import lombok.Builder;
 import lombok.Getter;
-
-
+import java.util.Date;
 import static models.Status.*;
 
 
 @Getter
 @Builder
-public class Store {
+public class Order {
     @Builder.Default
     private long id = 0;
     @Builder.Default
@@ -16,24 +15,10 @@ public class Store {
     @Builder.Default
     private long quantity = 0;
     @Builder.Default
-    private Status status = PLASED;
-
-
-
-
-
+    private Date shipDate;
     @Builder.Default
-    private Category category = Category.builder().build();
+    private Status status = PLACED;
     @Builder.Default
-    private String name = "kitty";
-    @Builder.Default
-    private Tags[] tags = new Tags[]{Tags.builder().build()};
-
-
-
-
-
-
-
+    private Boolean complete = true;
 
 }

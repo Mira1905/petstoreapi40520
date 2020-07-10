@@ -1,21 +1,18 @@
 package endpoints;
-
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import models.Pet;
-import models.Status;
-import models.Store;
+import models.Order;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.anyOf;
 
 public class StoreEndpoint {
-    public final  static String CREATE_PET = "/pet";
-    public final  static String UPDATE_STORE = "/store/order";
+    public final  static String CREATE_STORE = "/store/order";
     public final  static String GET_STORE = "/store/order/{orderId}";
     public final  static String DELETE_STORE = "/store/order/{orderId}";
     public final  static String GET_STORE_BY_STATUS = "/store/inventory";
@@ -32,60 +29,41 @@ public class StoreEndpoint {
                 .contentType("application/json");
     }
 
-
-
     @Step
-    public void getStore(Long petId){
+    public void getStore(Integer orderId){
         given()
-                .get(GET_STORE , petId)
+                .get(GET_STORE , orderId)
                 .then()
-                .body("id", anyOf(is(petId)))
+                .body("id", anyOf(is(orderId)))
                 .statusCode(200);
     }
 
-
     @Step
-    public void getStoryByStatus(Status status) {
-        given()
-                .param("status",status)
+    public void getStoryByStatus() {
+        ValidatableResponse response =  given()
                 .get(GET_STORE_BY_STATUS)
                 .then()
-                .body("[0].status", is(status.toString())) //ToDo: verify each element in array
                 .statusCode(200);
+        Assert.assertTrue(Integer.parseInt(response.extract().path("available").toString())> 0);
+
     }
 
-
     @Step
-    public Long createStore(Pet pet) {
+    public Integer createStore(Order order) {
         ValidatableResponse response =  given()
-                .body(pet)
-                .post(CREATE_PET)
+                .body(order)
+                .post(CREATE_STORE)
                 .then()
-                .body("name",is(pet.getName()))//todo:unharcode petName
                 .statusCode(200);
         return response.extract().path("id");
-
     }
 
     @Step
-    public void updatePet(Store pet) {
-        ValidatableResponse response =  given()
-                .body(pet)
-                .put(UPDATE_STORE )
-                .then()
-                // .body("name",is(pet.getName()))//todo:unharcode petName
-                .statusCode(200);
-    }
-
-
-    @Step
-    public void deleteStore(Long petId) {
+    public void deleteStore(Integer petId) {
         given()
                 .delete(StoreEndpoint.DELETE_STORE, petId)
                 .then()
-                // .body()
                 .statusCode(200);
-
 
     }
 }

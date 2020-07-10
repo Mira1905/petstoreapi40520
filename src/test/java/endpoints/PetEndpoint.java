@@ -36,18 +36,6 @@ public class PetEndpoint {
                 .baseUri("https://petstore.swagger.io/v2")
                 .contentType("application/json");
     }
-// ЗАМЕТКА ДЛЯ СЕБЯ!!!!
-
-//
-//    public String getPetName(Long petId){
-//        ValidatableResponse response =  given()
-//                .get(GET_PET, petId)
-//                .then()
-//                .body("id", anyOf(is(petId)))
-//                .statusCode(200);
-//        return response.extract().path("name");
-//    }
-
 
 
     @Step
