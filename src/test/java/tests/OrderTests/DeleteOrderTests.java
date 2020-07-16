@@ -1,21 +1,19 @@
-package tests;
-import endpoints.StoreEndpoint;
-import models.Order;
-import models.Status;
+package tests.OrderTests;
+import models.storeModels.Order;
+import models.storeModels.Status;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(SerenityRunner.class)
-public class GetOrderTests {
-
+public class DeleteOrderTests {
 
     @Steps
-    private StoreEndpoint storeEndpoint = new StoreEndpoint();
+    private endpoints.StoreEndpoint storeEndpoint = new endpoints.StoreEndpoint();
     private Integer orderId;
+
 
     @Before
     public void before(){
@@ -27,12 +25,7 @@ public class GetOrderTests {
     }
 
     @Test
-    public void getStoryById(){
-        storeEndpoint.getStore(orderId);
-    }
-
-    @After
-    public void after (){
+    public void deleteStore(){
         storeEndpoint.deleteStore(orderId);
 
     }

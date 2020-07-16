@@ -1,8 +1,7 @@
-package tests;
+package tests.PetTests;
 import endpoints.PetEndpoint;
-import io.restassured.response.Response;
-import models.Category;
-import models.Pet;
+import models.petModels.Category;
+import models.petModels.Pet;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import org.junit.After;

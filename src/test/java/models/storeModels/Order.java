@@ -1,8 +1,8 @@
-package models;
+package models.storeModels;
 import lombok.Builder;
 import lombok.Getter;
 import java.util.Date;
-import static models.Status.*;
+import static models.storeModels.Status.PLACED;
 
 
 @Getter

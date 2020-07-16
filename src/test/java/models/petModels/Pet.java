@@ -1,9 +1,9 @@
-package models;
+package models.petModels;
 import lombok.Builder;
 import lombok.Getter;
 
 
-import static models.Status.*;
+import static models.petModels.Status.*;
 
 
 @Getter
