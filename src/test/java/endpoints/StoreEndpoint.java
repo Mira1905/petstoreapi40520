@@ -43,6 +43,7 @@ public class StoreEndpoint {
         ValidatableResponse response =  given()
                 .get(GET_STORE_BY_STATUS)
                 .then()
+               // .body("$", Matcher.is(hasKey("MYTEST")))
                 .statusCode(200);
         Assert.assertTrue(Integer.parseInt(response.extract().path("available").toString())> 0);
 
