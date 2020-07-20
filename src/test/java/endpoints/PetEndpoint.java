@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Step;
 
 import java.io.File;
 
+import static config.ConfigProperties.BASE_URL;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.anyOf;
@@ -33,7 +34,7 @@ public class PetEndpoint {
         private RequestSpecification given(){
         return SerenityRest
                 .given()
-                .baseUri("https://petstore.swagger.io/v2")
+                .baseUri(BASE_URL)
                 .contentType("application/json");
     }
 

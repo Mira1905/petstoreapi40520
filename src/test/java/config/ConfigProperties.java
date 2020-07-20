@@ -15,7 +15,7 @@ public class ConfigProperties {
     public static final String env;
 
     static {
-        env = System.getProperty("env", "stg");
+        env = System.getProperty("env", "int");
         log.info("C  O  N  F  I  G  U  R  A  T  I  O  N");
         log.info("JVM timezone: {}", TimeZone.getDefault().getID());
         log.info("Environment : " + env);
